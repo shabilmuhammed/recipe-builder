@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pantry Pal — UI Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg1:#F8F6FF; --bg2:#EDF5FD;
+    --card:#FFFFFF; --card2:#F6F3FF;
+    --ink:#524C63; --muted:#9F98AF;
+    --primary:#B3A4F0; --primary2:#8E7DE6; --primary-soft:#EAE3FB;
+    --accent:#7FB6E6; --accent-bg:#E7F1FB; --accent-line:#CFE1F2; --accent-ink:#3C77B0;
+    --line:#EDE8F8; --line2:#E1D9F3;
+    --ind-bg:#FBEBE4; --ind-line:#F3D9CD; --ind-ink:#C2724F;
+    --west-bg:#ECE9FB; --west-line:#DDD5F5; --west-ink:#7A6BD6;
+    --shadow:0 18px 40px -18px rgba(90,70,140,.38);
+    --shadow-sm:0 6px 16px -11px rgba(90,70,140,.5);
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ margin:0; }
+  body{
+    font-family:'Nunito',system-ui,-apple-system,sans-serif; color:var(--ink);
+    background:linear-gradient(160deg,#F6F5FA 0%,#ECEEF6 100%);
+    min-height:100vh; padding:28px 16px 60px;
+  }
+  .page-head{ max-width:900px; margin:0 auto 22px; text-align:center; }
+  .page-head .kicker{ display:inline-flex; align-items:center; gap:8px; background:var(--card); border:1px solid var(--line2);
+    color:var(--primary2); font-weight:800; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    padding:7px 14px; border-radius:999px; box-shadow:var(--shadow-sm); }
+  .page-head h1{ font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:30px; margin:14px 0 6px; color:#403B4C; }
+  .page-head p{ margin:0; color:var(--muted); font-weight:600; }
+
+  .stage{ display:flex; gap:34px; justify-content:center; align-items:flex-start; flex-wrap:wrap; max-width:1000px; margin:0 auto; }
+  .frame-wrap{ display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .frame-cap{ font-weight:800; color:var(--muted); font-size:13px; }
+  .frame-cap b{ color:var(--primary2); }
+
+  /* iPhone frame */
+  .device{ width:392px; padding:13px; border-radius:56px;
+    background:linear-gradient(160deg,#EDEAF2,#D7D1DF);
+    box-shadow:var(--shadow), inset 0 0 0 2px rgba(255,255,255,.5); }
+  .screen{ position:relative; height:812px; border-radius:44px; overflow:hidden;
+    background:linear-gradient(175deg,var(--bg1),var(--bg2)); display:flex; flex-direction:column; }
+  .notch{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:150px; height:30px; background:#211d26; border-radius:0 0 18px 18px; z-index:40; }
+  .statusbar{ height:48px; flex:none; display:flex; align-items:center; justify-content:space-between; padding:0 26px; font-size:14px; font-weight:800; color:var(--ink); z-index:30; }
+  .statusbar .right{ display:flex; align-items:center; gap:6px; font-size:13px; }
+  .app{ flex:1; display:flex; flex-direction:column; overflow:hidden; }
+
+  /* Header */
+  .topbar{ flex:none; padding:4px 18px 12px; }
+  .brand{ display:flex; align-items:center; gap:11px; margin-bottom:14px; }
+  .logo{ width:44px; height:44px; border-radius:15px; flex:none; display:grid; place-items:center; font-size:24px;
+    background:linear-gradient(145deg,#EFE9FC,#DCD3F6); border:1px solid var(--line2); box-shadow:var(--shadow-sm); }
+  .brand .t h2{ font-family:'Fraunces',serif; font-weight:600; font-size:22px; margin:0; line-height:1; }
+  .brand .t p{ margin:3px 0 0; font-size:12.5px; color:var(--muted); font-weight:600; }
+  .search{ display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--line2);
+    border-radius:16px; padding:12px 14px; box-shadow:var(--shadow-sm); }
+  .search input{ border:none; outline:none; background:transparent; flex:1; font-family:inherit; font-size:16px; font-weight:600; color:var(--ink); }
+  .search input::placeholder{ color:#B7B0C6; }
+  .search .ic{ font-size:16px; opacity:.7; }
+  .cats{ display:flex; gap:9px; overflow-x:auto; padding:14px 18px 4px; margin:0 -18px; scrollbar-width:none; }
+  .cats::-webkit-scrollbar{ display:none; }
+  .cat{ flex:none; display:flex; align-items:center; gap:7px; background:var(--card); border:1px solid var(--line2); color:var(--ink);
+    padding:9px 14px; border-radius:14px; font-weight:800; font-size:14px; box-shadow:var(--shadow-sm); cursor:pointer; white-space:nowrap; }
+  .cat .e{ font-size:16px; }
+  .cat.active{ background:linear-gradient(135deg,var(--primary),var(--primary2)); color:#fff; border-color:transparent; }
+
+  /* Scroll body */
+  .scroll{ flex:1; overflow-y:auto; padding:6px 18px 16px; scrollbar-width:none; }
+  .scroll::-webkit-scrollbar{ width:0; }
+  .sec-title{ font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin:10px 2px 12px; color:var(--ink); }
+  .sec-title span{ color:var(--muted); font-family:'Nunito'; font-weight:700; font-size:13px; }
+  .list{ display:flex; flex-direction:column; gap:10px; }
+  .item{ display:flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:9px 11px; box-shadow:var(--shadow-sm); transition:.18s; }
+  .item .av{ width:44px; height:44px; border-radius:13px; flex:none; display:grid; place-items:center; font-size:22px; background:var(--card2); border:1px solid var(--line); }
+  .item .meta{ flex:1; min-width:0; }
+  .item .meta .n{ font-weight:800; font-size:15.5px; line-height:1.1; }
+  .item .meta .s{ font-size:12px; color:var(--muted); font-weight:600; margin-top:2px; }
+  .add{ width:38px; height:38px; flex:none; border:none; cursor:pointer; border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--primary2)); color:#fff; font-size:22px; font-weight:700;
+    display:grid; place-items:center; box-shadow:0 6px 14px -6px var(--primary2); transition:.18s; }
+  .add:active{ transform:scale(.9); }
+  .item.added{ border-color:var(--accent); background:var(--accent-bg); }
+  .item.added .av{ background:#fff; border-color:var(--accent-line); }
+  .item.added .meta .n{ color:var(--accent-ink); }
+  .item.added .add{ background:var(--accent); box-shadow:0 6px 14px -6px var(--accent); }
+
+  /* Bottom bar */
+  .bottom{ flex:none; padding:10px 18px 18px; background:linear-gradient(0deg,var(--bg2) 72%, rgba(237,245,253,0)); }
+  .tray-head{ display:flex; align-items:center; justify-content:space-between; margin:0 2px 8px; }
+  .tray-head .lbl{ font-weight:800; font-size:13px; color:var(--ink); }
+  .tray-head .clr{ font-weight:800; font-size:12.5px; color:var(--primary2); background:none; border:none; cursor:pointer; }
+  .tray{ display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; scrollbar-width:none; }
+  .tray::-webkit-scrollbar{ display:none; }
+  .chip{ flex:none; display:inline-flex; align-items:center; gap:7px; background:var(--card); border:1px solid var(--line2);
+    border-radius:999px; padding:7px 8px 7px 11px; font-weight:800; font-size:13px; box-shadow:var(--shadow-sm); }
+  .chip .x{ width:19px; height:19px; border-radius:50%; background:var(--card2); color:var(--muted); display:grid; place-items:center; font-size:13px; cursor:pointer; }
+  .tray .empty{ color:var(--muted); font-weight:600; font-size:13.5px; padding:6px 2px; }
+  .find{ width:100%; border:none; cursor:pointer; border-radius:18px; padding:15px 18px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2)); color:#fff; font-family:inherit; font-weight:800; font-size:17px;
+    display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 14px 26px -12px var(--primary2); }
+  .find:disabled{ background:#E4E0EE; color:#AAA3B8; box-shadow:none; cursor:default; }
+  .find .cnt{ background:rgba(255,255,255,.28); border-radius:999px; padding:2px 10px; font-size:14px; }
+  .home-ind{ position:absolute; bottom:8px; left:50%; transform:translateX(-50%); width:134px; height:5px; border-radius:999px; background:rgba(70,60,100,.22); z-index:30; }
+
+  /* ---------- Results screen ---------- */
+  .rhead{ flex:none; padding:2px 18px 10px; display:flex; align-items:center; gap:12px; }
+  .back{ width:40px; height:40px; border-radius:13px; border:1px solid var(--line2); background:var(--card); display:grid; place-items:center; font-size:18px; box-shadow:var(--shadow-sm); cursor:pointer; }
+  .rhead .t h2{ font-family:'Fraunces',serif; font-weight:600; font-size:21px; margin:0; }
+  .rhead .t p{ margin:3px 0 0; font-size:12.5px; color:var(--muted); font-weight:700; }
+  .rfilter{ flex:none; display:flex; gap:8px; padding:0 18px 12px; overflow-x:auto; scrollbar-width:none; }
+  .rfilter::-webkit-scrollbar{ display:none; }
+
+  .rcard{ position:relative; background:var(--card); border:1px solid var(--line); border-radius:22px; padding:15px 14px 14px; box-shadow:var(--shadow-sm); margin-bottom:16px; }
+  .rank{ position:absolute; top:-11px; left:16px; z-index:2; background:linear-gradient(135deg,var(--primary),var(--primary2)); color:#fff;
+    font-weight:800; font-size:12px; padding:4px 11px; border-radius:999px; box-shadow:0 8px 16px -8px var(--primary2); }
+  .rtop{ display:flex; gap:12px; align-items:flex-start; }
+  .rav{ width:52px; height:52px; flex:none; border-radius:16px; display:grid; place-items:center; font-size:27px; background:linear-gradient(145deg,#EFE9FC,#DCD3F6); border:1px solid var(--line2); }
+  .rtop .n{ font-family:'Fraunces',serif; font-weight:600; font-size:17.5px; line-height:1.15; margin:2px 0 3px; }
+  .rtop .d{ font-size:13px; color:var(--muted); font-weight:600; line-height:1.35; }
+  .tags{ display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 0; }
+  .tag{ font-size:11px; font-weight:800; padding:5px 9px; border-radius:999px; background:var(--card2); border:1px solid var(--line2); color:var(--ink); }
+  .tag.air{ background:var(--accent-bg); border-color:var(--accent-line); color:var(--accent-ink); }
+  .tag.easy{ background:var(--primary-soft); border-color:var(--line2); color:var(--primary2); }
+  .tag.ind{ background:var(--ind-bg); border-color:var(--ind-line); color:var(--ind-ink); }
+  .tag.west{ background:var(--west-bg); border-color:var(--west-line); color:var(--west-ink); }
+  .why{ display:flex; gap:8px; align-items:flex-start; margin-top:12px; background:linear-gradient(135deg,#F1ECFC,#E9F1FB);
+    border:1px solid var(--line2); border-radius:14px; padding:9px 11px; font-size:13px; font-weight:700; color:#6A5EA0; line-height:1.35; }
+  .ing{ margin-top:12px; }
+  .ing .h{ font-size:11.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:7px; }
+  .pills{ display:flex; flex-wrap:wrap; gap:6px; }
+  .p{ font-size:12.5px; font-weight:800; padding:5px 10px; border-radius:999px; }
+  .p.have{ background:var(--accent-bg); color:var(--accent-ink); border:1px solid var(--accent-line); }
+  .p.have::before{ content:'✓ '; }
+  .p.grab{ background:#fff; color:var(--primary2); border:1px dashed var(--primary); }
+  .p.grab::before{ content:'+ '; }
+  .steps-toggle{ margin-top:14px; width:100%; background:var(--card2); border:1px solid var(--line2); border-radius:13px; padding:11px;
+    font-family:inherit; font-weight:800; font-size:13.5px; color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px; }
+  .steps{ margin-top:12px; display:none; }
+  .rcard.open .steps{ display:block; }
+  .rcard.open .steps-toggle .arw{ transform:rotate(180deg); }
+  .steps-toggle .arw{ transition:.2s; }
+  .steps ol{ margin:0; padding-left:20px; }
+  .steps li{ font-size:13.5px; line-height:1.5; margin-bottom:9px; color:#6B6478; font-weight:600; }
+  .steps li b{ color:var(--primary2); }
+  .stepnote{ display:flex; gap:8px; align-items:center; background:var(--accent-bg); border:1px solid var(--accent-line); border-radius:12px; padding:9px 11px; font-size:12.5px; font-weight:800; color:var(--accent-ink); margin:4px 0 12px; }
+  .health{ display:flex; gap:8px; align-items:center; margin-top:4px; font-size:12.5px; font-weight:700; color:var(--accent-ink); background:var(--accent-bg); border:1px solid var(--accent-line); border-radius:12px; padding:9px 11px; }
+
+  @media (max-width:860px){ .stage{ gap:40px; } }
+</style>
+</head>
+<body>
+  <div class="page-head">
+    <div class="kicker">🫐 Lavender & Sky</div>
+    <h1>Pantry Pal</h1>
+    <p>Tap the ingredients you have — get your top 5 easy, healthy recipes in an even mix of Kerala &amp; Western. Try it: add &amp; remove items, switch categories, filter by cuisine.</p>
+  </div>
+
+  <div class="stage">
+    <!-- ============ PHONE 1: BUILDER ============ -->
+    <div class="frame-wrap">
+      <div class="device"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span class="right">􀙇 􀒱 􀛨 100%</span></div>
+        <div class="app">
+          <div class="topbar">
+            <div class="brand">
+              <div class="logo">🥗</div>
+              <div class="t"><h2>Pantry Pal</h2><p>What's in your kitchen today?</p></div>
+            </div>
+            <div class="search"><span class="ic">🔍</span><input id="q" placeholder="Search ingredients…" /></div>
+            <div class="cats" id="cats"></div>
+          </div>
+          <div class="scroll">
+            <div class="sec-title" id="secTitle">All ingredients <span></span></div>
+            <div class="list" id="list"></div>
+          </div>
+          <div class="bottom">
+            <div class="tray-head"><span class="lbl">🧺 Your basket</span><button class="clr" id="clr">Clear</button></div>
+            <div class="tray" id="tray"></div>
+            <button class="find" id="find"><span>🍳 Find Recipes</span><span class="cnt" id="cnt">0</span></button>
+          </div>
+        </div>
+        <div class="home-ind"></div>
+      </div></div>
+      <div class="frame-cap">1 · <b>Build your pantry</b></div>
+    </div>
+
+    <!-- ============ PHONE 2: RESULTS ============ -->
+    <div class="frame-wrap">
+      <div class="device"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span class="right">􀙇 􀒱 􀛨 100%</span></div>
+        <div class="app">
+          <div class="rhead">
+            <button class="back">←</button>
+            <div class="t"><h2>Your Top 5</h2><p>An even mix of Kerala &amp; Western</p></div>
+          </div>
+          <div class="rfilter" id="rfilter"></div>
+          <div class="scroll" id="results"></div>
+        </div>
+        <div class="home-ind"></div>
+      </div></div>
+      <div class="frame-cap">2 · <b>Your top 5 recipes</b></div>
+    </div>
+  </div>
+
+<script>
+  const DATA = {
+    veg:[
+      {n:'Onion',e:'🧅',s:'Savola'},{n:'Tomato',e:'🍅',s:'Thakkali'},{n:'Potato',e:'🥔',s:'Urulakizhangu'},
+      {n:'Carrot',e:'🥕'},{n:'Brinjal',e:'🍆',s:'Vazhuthana'},{n:'Okra',e:'🌿',s:'Vendakka'},
+      {n:'Spinach',e:'🥬',s:'Cheera'},{n:'Cabbage',e:'🥬'},{n:'Green beans',e:'🫛'},{n:'Pumpkin',e:'🎃',s:'Mathanga'}
+    ],
+    protein:[
+      {n:'Chicken',e:'🍗',s:'Kozhi'},{n:'Egg',e:'🥚',s:'Mutta'},{n:'Fish',e:'🐟',s:'Meen'},
+      {n:'Prawns',e:'🦐',s:'Chemmeen'},{n:'Paneer',e:'🧀'},{n:'Beef',e:'🥩'},{n:'Tofu',e:'🧊'},{n:'Soya chunks',e:'🫛'}
+    ],
+    dal:[
+      {n:'Toor dal',e:'🫘',s:'Thuvara'},{n:'Moong dal',e:'🫘',s:'Cherupayar'},{n:'Chana',e:'🫘',s:'Kadala'},
+      {n:'Rajma',e:'🫘'},{n:'Green gram',e:'🫘'}
+    ],
+    spice:[
+      {n:'Ginger',e:'🫚',s:'Inji'},{n:'Garlic',e:'🧄',s:'Veluthulli'},{n:'Green chili',e:'🌶️',s:'Pacha mulaku'},
+      {n:'Curry leaves',e:'🌿',s:'Kariveppila'},{n:'Coriander',e:'🌿',s:'Malli ila'},{n:'Black pepper',e:'⚫',s:'Kurumulaku'}
+    ],
+    other:[
+      {n:'Coconut',e:'🥥',s:'Thenga'},{n:'Coconut oil',e:'🥥'},{n:'Curd',e:'🥣',s:'Thairu'},
+      {n:'Rice',e:'🍚',s:'Ari'},{n:'Cashew',e:'🥜'}
+    ],
+  };
+  const CATS = [
+    {id:'all',label:'All',e:'✨'},{id:'veg',label:'Veggies',e:'🥦'},{id:'protein',label:'Proteins',e:'🍗'},
+    {id:'dal',label:'Dals',e:'🫘'},{id:'spice',label:'Spices',e:'🌿'},{id:'other',label:'Pantry',e:'🥥'}
+  ];
+  const CAT_LABEL = {all:'All ingredients',veg:'Vegetables',protein:'Proteins',dal:'Lentils & Legumes',spice:'Spices & Fresh',other:'Pantry & Others'};
+
+  const selected = new Set(['Onion','Tomato','Chicken','Ginger','Garlic','Green chili','Curry leaves','Coconut']);
+  let active='all', query='';
+  const allItems = () => Object.values(DATA).flat();
+  const catItems = () => active==='all' ? allItems() : DATA[active];
+  const byName = n => allItems().find(i=>i.n===n) || {n, e:'🍽️'};
+  const $ = s => document.querySelector(s);
+  const cats=$('#cats'), list=$('#list'), tray=$('#tray'), cnt=$('#cnt'), find=$('#find'), secTitle=$('#secTitle');
+
+  function renderCats(){
+    cats.innerHTML = CATS.map(c=>`<button class="cat ${c.id===active?'active':''}" data-c="${c.id}"><span class="e">${c.e}</span>${c.label}</button>`).join('');
+  }
+  function renderList(){
+    let items = catItems();
+    if(query){ const q=query.toLowerCase(); items = allItems().filter(i => i.n.toLowerCase().includes(q) || (i.s&&i.s.toLowerCase().includes(q))); }
+    secTitle.innerHTML = (query ? `Results for “${query}”` : CAT_LABEL[active]) + ` <span>· ${items.length} items</span>`;
+    if(items.length===0){
+      list.innerHTML = `<div class="item" style="justify-content:space-between"><div style="display:flex;gap:12px;align-items:center"><div class="av">➕</div><div class="meta"><div class="n">Add “${query}”</div><div class="s">Not in the list? Add it anyway</div></div></div><button class="add" data-add="${query}">+</button></div>`;
+      return;
+    }
+    list.innerHTML = items.map(i=>{
+      const on = selected.has(i.n);
+      return `<div class="item ${on?'added':''}"><div class="av">${i.e}</div><div class="meta"><div class="n">${i.n}</div>${i.s?`<div class="s">${i.s}</div>`:''}</div><button class="add" data-add="${i.n}">${on?'✓':'+'}</button></div>`;
+    }).join('');
+  }
+  function renderTray(){
+    const arr=[...selected];
+    cnt.textContent = arr.length; find.disabled = arr.length===0;
+    tray.innerHTML = arr.length===0 ? `<div class="empty">Tap + on ingredients to add them here…</div>`
+      : arr.map(n=>{ const i=byName(n); return `<span class="chip">${i.e} ${n}<span class="x" data-del="${n}">✕</span></span>`; }).join('');
+  }
+  function renderAll(){ renderCats(); renderList(); renderTray(); }
+
+  document.addEventListener('click', e=>{
+    const c=e.target.closest('[data-c]'); if(c){ active=c.dataset.c; query=''; $('#q').value=''; renderAll(); return; }
+    const a=e.target.closest('[data-add]'); if(a){ const n=a.dataset.add; selected.has(n)?selected.delete(n):selected.add(n); renderList(); renderTray(); return; }
+    const d=e.target.closest('[data-del]'); if(d){ selected.delete(d.dataset.del); renderList(); renderTray(); return; }
+    const t=e.target.closest('.steps-toggle'); if(t){ t.closest('.rcard').classList.toggle('open'); return; }
+  });
+  $('#q').addEventListener('input', e=>{ query=e.target.value.trim(); renderList(); });
+  $('#clr').addEventListener('click', ()=>{ selected.clear(); renderList(); renderTray(); });
+  find.addEventListener('click', ()=>{ find.style.transform='scale(.97)'; setTimeout(()=>find.style.transform='',150); });
+
+  // ---------- Results (even Kerala / Western mix) ----------
+  const RECIPES=[
+    {rank:'#1',cui:'west',cuiLabel:'🌎 Western',e:'🍗',n:'Air Fryer Peri-Peri Chicken',
+     d:'Punchy, crispy chicken with a smoky-spicy kick — all air-fried.',
+     tags:[['Air fryer','air'],['Easy','easy'],['30 min',''],['High protein','']],
+     why:'Turns your chicken, garlic & green chili into a crispy favourite — no deep-frying.',
+     have:['Chicken','Garlic','Green chili','Onion'], grab:['Lemon','Paprika','Oregano'],
+     note:'Air fry at 190°C for 18 min, flipping once, until juices run clear.',
+     health:'Air-fried lean protein — big flavour, barely any oil.', open:true,
+     steps:['Mix a marinade of <b>garlic</b>, <b>green chili</b>, paprika, oregano, lemon juice, salt & 1 tsp oil.',
+            'Coat the <b>chicken</b> well and rest 15 min. Preheat air fryer to <b>190°C</b>.',
+            '<b>Air fry at 190°C for 18 min</b>, flipping once halfway, until cooked through.',
+            'Scatter sliced <b>onion</b> and a squeeze of lemon on top. Serve hot.']},
+    {rank:'#2',cui:'ind',cuiLabel:'🌴 Kerala',e:'🥘',n:'Nadan Kozhi Curry',
+     d:'Homely Kerala chicken curry in a roasted-coconut gravy.',
+     tags:[['Stovetop',''],['Easy','easy'],['40 min',''],['Coconut','']],
+     why:'A perfect match for your coconut, tomato & aromatics — true Kerala comfort.',
+     have:['Chicken','Onion','Tomato','Ginger','Garlic','Green chili','Curry leaves','Coconut'], grab:['Garam masala'],
+     health:'Coconut-based, light on oil, loaded with fresh aromatics.', steps:[]},
+    {rank:'#3',cui:'west',cuiLabel:'🌎 Western',e:'🍝',n:'One-Pan Tomato Garlic Pasta',
+     d:'Fresh, garlicky tomato pasta — ready before takeout would arrive.',
+     tags:[['Stovetop',''],['Easy','easy'],['25 min',''],['Vegetarian','easy']],
+     why:'Uses your ripe tomato, onion & garlic for a light, no-cream sauce.',
+     have:['Tomato','Onion','Garlic'], grab:['Pasta','Olive oil','Basil'],
+     health:'No cream, minimal oil — just fresh tomatoes and herbs.', steps:[]},
+    {rank:'#4',cui:'ind',cuiLabel:'🌴 Kerala',e:'🍅',n:'Thakkali Curry (Tomato–Coconut)',
+     d:'Tangy, creamy tomato curry — lovely with rice or dosa.',
+     tags:[['Vegetarian','easy'],['Easy','easy'],['20 min',''],['Light','']],
+     why:'A quick no-fuss veg dish from tomato, coconut & green chili you already have.',
+     have:['Tomato','Onion','Coconut','Green chili','Curry leaves'], grab:['Mustard seeds'],
+     health:'Under 20 min, minimal oil, naturally vegan.', steps:[]},
+    {rank:'#5',cui:'west',cuiLabel:'🌎 Western',e:'🥗',n:'Air Fryer Garlic-Herb Chicken Traybake',
+     d:'Chicken and veggies roasted together — one basket, zero fuss.',
+     tags:[['Air fryer','air'],['Easy','easy'],['35 min',''],['One-basket','']],
+     why:'Everything you have roasts together in the air fryer with almost no oil.',
+     have:['Chicken','Onion','Tomato','Garlic'], grab:['Bell pepper','Olive oil','Mixed herbs'],
+     note:'Air fry at 200°C for 20–22 min, shaking once.',
+     health:'Veg-loaded, air-roasted, and light on oil.', steps:[]},
+  ];
+  const FILTERS=[{id:'all',l:'All 5'},{id:'ind',l:'🌴 Indian'},{id:'west',l:'🌎 Western'}];
+  let rfilter='all';
+  function renderFilters(){
+    document.getElementById('rfilter').innerHTML = FILTERS.map(f=>`<button class="cat ${f.id===rfilter?'active':''}" data-f="${f.id}">${f.l}</button>`).join('');
+  }
+  function renderResults(){
+    const items = rfilter==='all' ? RECIPES : RECIPES.filter(r=>r.cui===rfilter);
+    document.getElementById('results').innerHTML = items.map(r=>`
+      <div class="rcard ${r.open?'open':''}">
+        <span class="rank">${r.rank}</span>
+        <div class="rtop"><div class="rav">${r.e}</div><div><div class="n">${r.n}</div><div class="d">${r.d}</div></div></div>
+        <div class="tags"><span class="tag ${r.cui}">${r.cuiLabel}</span>${r.tags.map(t=>`<span class="tag ${t[1]}">${t[0]}</span>`).join('')}</div>
+        <div class="why">✨ ${r.why}</div>
+        <div class="ing"><div class="h">You have</div><div class="pills">${r.have.map(h=>`<span class="p have">${h}</span>`).join('')}</div></div>
+        ${r.grab.length?`<div class="ing"><div class="h">Grab a little</div><div class="pills">${r.grab.map(g=>`<span class="p grab">${g}</span>`).join('')}</div></div>`:''}
+        <button class="steps-toggle">View steps <span class="arw">▾</span></button>
+        <div class="steps">
+          ${r.note?`<div class="stepnote">🔥 ${r.note}</div>`:''}
+          ${r.steps.length?`<ol>${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol>`:`<div class="d" style="padding:4px 2px 10px">Full steps are generated for you when you tap Find Recipes.</div>`}
+          <div class="health">🌿 ${r.health}</div>
+        </div>
+      </div>`).join('');
+  }
+  document.getElementById('rfilter').addEventListener('click', e=>{
+    const f=e.target.closest('[data-f]'); if(!f) return; rfilter=f.dataset.f; renderFilters(); renderResults();
+  });
+
+  renderFilters(); renderResults(); renderAll();
+</script>
+</body>
+</html>

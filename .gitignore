@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+.env
+.env.local
+.env.*.local
+.vercel
+.DS_Store
+*.log
+
+# Claude Code per-user local settings
+.claude/settings.local.json
