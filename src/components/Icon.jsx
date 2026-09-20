@@ -62,18 +62,21 @@ const PATHS = {
       <path d="M12 17h.01" />
     </>
   ),
+  bookmark: (
+    <path d="M6 3.5h12a.5.5 0 0 1 .5.5v16.2a.5.5 0 0 1-.77.42L12 17.2l-5.73 3.42a.5.5 0 0 1-.77-.42V4a.5.5 0 0 1 .5-.5z" />
+  ),
 }
 
-export default function Icon({ name, size = 22, stroke = 1.75, className }) {
+export default function Icon({ name, size = 22, stroke = 1.75, className, fill = false }) {
   return (
     <svg
       className={className}
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="none"
+      fill={fill ? 'currentColor' : 'none'}
       stroke="currentColor"
-      strokeWidth={stroke}
+      strokeWidth={fill ? 0 : stroke}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import RecipeCard from './RecipeCard'
 import Icon from './Icon'
+import { recipeId } from '../lib/useSaved'
 
 const FILTERS = [
   { id: 'all', label: 'All' },
@@ -10,7 +11,7 @@ const FILTERS = [
 
 const group = (cuisine) => (cuisine === 'Western' ? 'west' : 'ind')
 
-export default function RecipeResults({ recipes, count, onBack }) {
+export default function RecipeResults({ recipes, count, onBack, isSaved, onToggleSave }) {
   const [f, setF] = useState('all')
   const shown = f === 'all' ? recipes : recipes.filter((r) => group(r.cuisine) === f)
 
@@ -44,7 +45,13 @@ export default function RecipeResults({ recipes, count, onBack }) {
 
       <div className="rlist">
         {shown.map((r) => (
-          <RecipeCard key={recipes.indexOf(r)} recipe={r} rank={recipes.indexOf(r) + 1} />
+          <RecipeCard
+            key={recipes.indexOf(r)}
+            recipe={r}
+            rank={recipes.indexOf(r) + 1}
+            saved={isSaved ? isSaved(recipeId(r)) : false}
+            onToggleSave={onToggleSave}
+          />
         ))}
         {shown.length === 0 && (
           <div className="empty-hint">No {f === 'west' ? 'Western' : 'Indian'} recipes this time.</div>

@@ -19,7 +19,7 @@ function pickEmoji(r) {
   return '🍽️'
 }
 
-export default function RecipeCard({ recipe, rank }) {
+export default function RecipeCard({ recipe, rank, saved, onToggleSave }) {
   const [open, setOpen] = useState(rank === 1)
   const c = CUISINE[recipe.cuisine] || CUISINE.Indian
   const isAir =
@@ -28,7 +28,17 @@ export default function RecipeCard({ recipe, rank }) {
 
   return (
     <div className="rcard">
-      <span className="rank">#{rank}</span>
+      {rank ? <span className="rank">#{rank}</span> : null}
+      {onToggleSave && (
+        <button
+          className={'save-btn' + (saved ? ' on' : '')}
+          onClick={() => onToggleSave(recipe)}
+          aria-pressed={saved}
+          aria-label={saved ? 'Remove from saved recipes' : 'Save this recipe'}
+        >
+          <Icon name="bookmark" size={20} fill={saved} />
+        </button>
+      )}
       <div className="rtop">
         <div className="rav" aria-hidden="true">
           {pickEmoji(recipe)}

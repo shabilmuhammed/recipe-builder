@@ -10,6 +10,8 @@ import SelectedTray from './components/SelectedTray'
 import FindRecipesButton from './components/FindRecipesButton'
 import Loading from './components/Loading'
 import RecipeResults from './components/RecipeResults'
+import SavedRecipes from './components/SavedRecipes'
+import { useSaved } from './lib/useSaved'
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 const titleCase = (s) => s.replace(/\b\w/g, (c) => c.toUpperCase())
@@ -20,6 +22,7 @@ const greeting = () => {
 
 export default function App() {
   const { selected, has, toggle, remove, clear, add } = usePantry()
+  const { saved, isSaved, toggleSave, count: savedCount } = useSaved()
   const [query, setQuery] = useState('')
   const [activeCat, setActiveCat] = useState('all')
   const [view, setView] = useState('build') // build | loading | results | error
@@ -65,7 +68,17 @@ export default function App() {
 
   if (view === 'loading') return <Loading />
   if (view === 'results')
-    return <RecipeResults recipes={recipes} count={selected.length} onBack={() => setView('build')} />
+    return (
+      <RecipeResults
+        recipes={recipes}
+        count={selected.length}
+        onBack={() => setView('build')}
+        isSaved={isSaved}
+        onToggleSave={toggleSave}
+      />
+    )
+  if (view === 'saved')
+    return <SavedRecipes saved={saved} onToggleSave={toggleSave} onBack={() => setView('build')} />
   if (view === 'error')
     return (
       <div className="screen-msg">
@@ -92,10 +105,18 @@ export default function App() {
           <div className="logo">
             <Icon name="chef" size={24} />
           </div>
-          <div>
+          <div className="brandtext">
             <h1>Pantry Pal</h1>
             <p className="greet">{greeting()} · what's in your kitchen?</p>
           </div>
+          <button
+            className="saved-btn"
+            onClick={() => setView('saved')}
+            aria-label={`Saved recipes${savedCount ? ` (${savedCount})` : ''}`}
+          >
+            <Icon name="bookmark" size={22} />
+            {savedCount > 0 && <span className="badge">{savedCount}</span>}
+          </button>
         </div>
         <SearchBar value={query} onChange={setQuery} />
         <CategoryTiles
@@ -124,6 +145,9 @@ export default function App() {
 
       <footer className="bottom">
         <SelectedTray selected={selected} onRemove={remove} onClear={clear} />
+        <p className="staples-note">
+          <Icon name="leaf" size={13} /> Salt, oil &amp; everyday spices are always assumed
+        </p>
         <FindRecipesButton count={selected.length} onClick={find} />
       </footer>
     </div>
