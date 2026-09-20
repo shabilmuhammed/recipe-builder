@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Icon from './Icon'
 
 const MSGS = [
   'Rummaging through your pantry…',
@@ -16,12 +17,14 @@ export default function Loading() {
   }, [])
   return (
     <div className="loading">
-      <div className="pot">🍳</div>
+      <div className="pot">
+        <Icon name="chef" size={42} stroke={2} />
+      </div>
       <div>
         <h3>Cooking up ideas…</h3>
         <p>{MSGS[i]}</p>
       </div>
-      <div className="dots">
+      <div className="dots" aria-hidden="true">
         <i></i>
         <i></i>
         <i></i>

@@ -1,8 +1,15 @@
+import Icon from './Icon'
+
 export default function SelectedTray({ selected, onRemove, onClear }) {
   return (
     <>
       <div className="tray-head">
-        <span className="lbl">🧺 Your basket{selected.length ? ` · ${selected.length}` : ''}</span>
+        <span className="lbl">
+          <span className="ic">
+            <Icon name="basket" size={18} />
+          </span>
+          Your basket{selected.length ? ` · ${selected.length}` : ''}
+        </span>
         {selected.length > 0 && (
           <button className="clr" onClick={onClear}>
             Clear
@@ -15,9 +22,9 @@ export default function SelectedTray({ selected, onRemove, onClear }) {
         ) : (
           selected.map((s) => (
             <span className="chip" key={s.id}>
-              {s.emoji} {s.name}
+              <span aria-hidden="true">{s.emoji}</span> {s.name}
               <button className="x" onClick={() => onRemove(s.id)} aria-label={`Remove ${s.name}`}>
-                ✕
+                <Icon name="x" size={14} stroke={2} />
               </button>
             </span>
           ))

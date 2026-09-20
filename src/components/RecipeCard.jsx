@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Icon from './Icon'
 
 const CUISINE = {
   Western: { cls: 'west', label: '🌎 Western' },
@@ -29,7 +30,9 @@ export default function RecipeCard({ recipe, rank }) {
     <div className="rcard">
       <span className="rank">#{rank}</span>
       <div className="rtop">
-        <div className="rav">{pickEmoji(recipe)}</div>
+        <div className="rav" aria-hidden="true">
+          {pickEmoji(recipe)}
+        </div>
         <div>
           <div className="n">{recipe.name}</div>
           {recipe.description && <div className="d">{recipe.description}</div>}
@@ -54,7 +57,14 @@ export default function RecipeCard({ recipe, rank }) {
         ))}
       </div>
 
-      {recipe.whyItFits && <div className="why">✨ {recipe.whyItFits}</div>}
+      {recipe.whyItFits && (
+        <div className="why">
+          <span className="ic">
+            <Icon name="sparkle" size={16} />
+          </span>
+          {recipe.whyItFits}
+        </div>
+      )}
 
       {recipe.ingredientsHave?.length > 0 && (
         <div className="ing">
@@ -62,7 +72,8 @@ export default function RecipeCard({ recipe, rank }) {
           <div className="pills">
             {recipe.ingredientsHave.map((x, i) => (
               <span className="p have" key={i}>
-                ✓ {x}
+                <Icon name="check" size={13} stroke={2.5} className="ic" />
+                {x}
               </span>
             ))}
           </div>
@@ -75,15 +86,17 @@ export default function RecipeCard({ recipe, rank }) {
           <div className="pills">
             {recipe.ingredientsNeeded.map((x, i) => (
               <span className="p grab" key={i}>
-                + {x}
+                <Icon name="plus" size={13} stroke={2.5} className="ic" />
+                {x}
               </span>
             ))}
           </div>
         </div>
       )}
 
-      <button className="steps-toggle" onClick={() => setOpen((o) => !o)}>
-        {open ? 'Hide steps' : 'View steps'} <span className={'arw' + (open ? ' open' : '')}>▾</span>
+      <button className="steps-toggle" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+        {open ? 'Hide steps' : 'View steps'}
+        <Icon name="chevron" size={18} className={'ic' + (open ? ' open' : '')} />
       </button>
 
       {open && (
@@ -93,7 +106,14 @@ export default function RecipeCard({ recipe, rank }) {
               <li key={i}>{s}</li>
             ))}
           </ol>
-          {recipe.healthNote && <div className="health">🌿 {recipe.healthNote}</div>}
+          {recipe.healthNote && (
+            <div className="health">
+              <span className="ic">
+                <Icon name="leaf" size={16} />
+              </span>
+              {recipe.healthNote}
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { CATEGORIES, INGREDIENTS } from './data/ingredients'
 import { usePantry } from './lib/usePantry'
 import { fetchRecipes } from './lib/api'
+import Icon from './components/Icon'
 import SearchBar from './components/SearchBar'
 import CategoryTiles from './components/CategoryTiles'
 import IngredientList from './components/IngredientList'
@@ -12,6 +13,10 @@ import RecipeResults from './components/RecipeResults'
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 const titleCase = (s) => s.replace(/\b\w/g, (c) => c.toUpperCase())
+const greeting = () => {
+  const h = new Date().getHours()
+  return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'
+}
 
 export default function App() {
   const { selected, has, toggle, remove, clear, add } = usePantry()
@@ -64,7 +69,9 @@ export default function App() {
   if (view === 'error')
     return (
       <div className="screen-msg">
-        <div className="big">😔</div>
+        <div className="big">
+          <Icon name="alert" size={38} />
+        </div>
         <h3>Couldn’t fetch recipes</h3>
         <p>{error}</p>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -82,10 +89,12 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          <div className="logo">🥗</div>
+          <div className="logo">
+            <Icon name="chef" size={24} />
+          </div>
           <div>
-            <h2>Pantry Pal</h2>
-            <p>What's in your kitchen today?</p>
+            <h1>Pantry Pal</h1>
+            <p className="greet">{greeting()} · what's in your kitchen?</p>
           </div>
         </div>
         <SearchBar value={query} onChange={setQuery} />

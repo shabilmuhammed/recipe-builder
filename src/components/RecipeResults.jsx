@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import RecipeCard from './RecipeCard'
+import Icon from './Icon'
 
 const FILTERS = [
   { id: 'all', label: 'All' },
@@ -17,20 +18,22 @@ export default function RecipeResults({ recipes, count, onBack }) {
     <div className="results">
       <div className="rhead">
         <button className="back" onClick={onBack} aria-label="Back to ingredients">
-          ←
+          <Icon name="back" size={22} />
         </button>
         <div className="t">
-          <h2>Your Top {recipes.length}</h2>
+          <h1>Your Top {recipes.length}</h1>
           <p>
             An even mix of Kerala &amp; Western · {count} ingredient{count === 1 ? '' : 's'}
           </p>
         </div>
       </div>
 
-      <div className="rfilter">
+      <div className="rfilter" role="tablist" aria-label="Filter by cuisine">
         {FILTERS.map((x) => (
           <button
             key={x.id}
+            role="tab"
+            aria-selected={x.id === f}
             className={'cat' + (x.id === f ? ' active' : '')}
             onClick={() => setF(x.id)}
           >
